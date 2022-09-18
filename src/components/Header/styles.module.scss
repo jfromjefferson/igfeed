@@ -1,0 +1,17 @@
+
+.header {
+    background-color: var(--gray-800);
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+
+    img {
+        margin-right: 0.5rem;
+    }
+
+    strong {
+        text-transform: uppercase;
+    }
+}
