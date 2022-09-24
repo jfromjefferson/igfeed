@@ -1,0 +1,123 @@
+
+.post {
+    background-color: var(--gray-800);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+
+    hr {
+        margin: 30px 0;
+        border-color: var(--gray-400);
+    }
+
+    .postHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+
+        .profile {
+            display: flex;
+            align-items: center;
+    
+            .avatar {
+                box-sizing: initial;
+                width: 3rem;
+                height: 3rem;
+                border-radius: 8px;
+                border: 1px solid var(--gray-800);
+                margin-bottom: 0.5rem;
+                outline: 2px solid var(--green-500);
+            }
+
+        }
+
+        .userInfo {
+            margin-left: 10px;
+            display: flex;
+            flex-direction: column;
+
+            strong {
+                color: var(--grey-100);
+            }
+    
+            span {
+                font-size: 0.875rem;
+                color: var(--gray-400);
+            }
+        }
+
+        .publishDate {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+    }
+
+    .postBody {
+
+        p {
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+    }
+
+    .postFooter {
+
+        a {
+            display: block;
+            color: var(--green-500);
+            margin: 20px 0;
+            text-decoration: none;
+
+            &:hover {
+                filter: brightness(0.8);
+            }
+        }
+
+        form {
+            margin-bottom: 15px;
+            
+            textarea {
+                width: 100%;
+                border: none;
+                height: 180px;
+                border-radius: 3px;
+                background-color: var(--gray-900);
+                resize: none;
+                padding: 5px;
+                color: var(--gray-300);
+                margin-bottom: 10px;
+
+                &:hover, &:focus {
+                    border: 1px solid var(--green-500);
+                }
+            }
+
+            footer {
+                // visibility: hidden;
+                // max-height: 0;
+
+                button {
+                    border: none;
+                    border-radius: 3px;
+                    background-color: var(--green-500);
+                    padding: 12px;
+                    color: var(--white);
+    
+                    transition: filter 0.3s;
+    
+                    &:hover {
+                        filter: brightness(0.8);
+                    }
+                }
+            }
+
+            // &:focus-within {
+            //     footer {
+            //         visibility: visible;
+            //         max-height: none;
+            //     }
+            // }
+        }
+    }
+}

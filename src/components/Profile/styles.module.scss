@@ -1,0 +1,64 @@
+.profile {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+    .avatar {
+        box-sizing: initial;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+    }
+
+    .userInfo {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+
+        strong {
+            color: var(--grey-100);
+        }
+
+        span {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+    }
+
+}
+
+.sidebarProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -2rem;
+
+    .avatar {
+        box-sizing: initial;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+    }
+
+    .userInfo {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+
+        strong {
+            color: var(--grey-100);
+        }
+
+        span {
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+    }
+}
+
+.avatarWithBorder {
+    border: 1px solid var(--gray-800);
+    outline: 2px solid var(--green-500);
+}
