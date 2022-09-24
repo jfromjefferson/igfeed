@@ -35,17 +35,20 @@ export function Post({ post }) {
 
     const updateLike = ({uuid}) => {
         const commentTemp = commentList.find(comment => comment.uuid === uuid)
+        const commentListTemp = [...commentList]
+        const commentIndex = commentList.findIndex(comment => comment.uuid === commentTemp.uuid)
 
 
-        if(commentTemp.color === 'grey'){
+        commentTemp.liked = !commentTemp.liked
+        if(commentTemp.liked){
             commentTemp.likes += 1
-            commentTemp.color = 'red'
         }else {
             commentTemp.likes -= 1
-            commentTemp.color = 'grey'
         }
 
-        setCommentList([commentTemp, ...commentList.filter(comment => comment.uuid !== uuid)])
+        commentListTemp[commentIndex] = commentTemp
+
+        setCommentList(commentListTemp)
         
     }
 
@@ -65,7 +68,7 @@ export function Post({ post }) {
             created: new Date(),
             text: commentText,
             likes: 0,
-            color: 'grey'
+            liked: true
           }
 
         setCommentList([commentTemp, ...commentList])

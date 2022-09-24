@@ -41,7 +41,7 @@ export function Comment(props) {
                     size={25} 
                     className={styles.icon} 
                     onClick={onUpdateLike} 
-                    color={comment.color}
+                    color={comment.liked ? 'red' : 'gray'}
                     />
                     <span>{comment.likes}</span>
                 </div>

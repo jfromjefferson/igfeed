@@ -20,7 +20,7 @@ export function App() {
       created: new Date(),
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed mollis ipsum.',
       likes: Math.floor(Math.random()*20),
-      color: 'grey',
+      liked: false,
     })
   }
 
