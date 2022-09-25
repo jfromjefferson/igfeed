@@ -3,17 +3,28 @@ import { Trash, Heart } from 'phosphor-react'
 import { Profile } from '../Profile';
 import { format, formatDistanceToNow } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import { UserProps } from '../Post';
 
-export function Comment(props) {
-    const { comment, onRemoveComment, onUpdateLike } = props
+export interface CommentProps {
+    user: UserProps
+    created: Date,
+    text: string,
+    likes: number,
+    liked: boolean,
+    uuid: number,
+    onRemoveComment?: (comment: CommentProps) => void,
+    onUpdateLike?: (comment: CommentProps) => void,
+}
 
-    const { user } = comment
+export function Comment({onRemoveComment, onUpdateLike, ...rest}: CommentProps) {
 
-    const createdFormatted = format(comment.created, "dd 'de' LLLL 'de' u 'às' HH:mm'h'", {
+    const { created, user, text, liked, likes } = rest
+
+    const createdFormatted = format(created, "dd 'de' LLLL 'de' u 'às' HH:mm'h'", {
         locale: ptBR,
     })
 
-    const createdRelativeToNow = formatDistanceToNow(comment.created, {
+    const createdRelativeToNow = formatDistanceToNow(created, {
         locale: ptBR,
         addSuffix: true,
     })
@@ -26,14 +37,14 @@ export function Comment(props) {
                 <header className={styles.commentHeader}>
                     <div className={styles.userInfo}>
                         <strong>{user.name}</strong>
-                        <time title={createdFormatted} dateTime={comment.created.toISOString()}>{createdRelativeToNow}</time>
+                        <time title={createdFormatted} dateTime={created.toISOString()}>{createdRelativeToNow}</time>
                     </div>
 
                     <Trash size={25} className={styles.icon} onClick={onRemoveComment} />
                 </header>
 
                 <div className={styles.commentBody}>
-                    <p>{comment.text}</p>
+                    <p>{text}</p>
                 </div>
 
                 <div className={styles.commentFooter}>
@@ -41,9 +52,9 @@ export function Comment(props) {
                     size={25} 
                     className={styles.icon} 
                     onClick={onUpdateLike} 
-                    color={comment.liked ? 'red' : 'gray'}
+                    color={liked ? 'red' : 'gray'}
                     />
-                    <span>{comment.likes}</span>
+                    <span>{likes}</span>
                 </div>
             </div>
         </div>

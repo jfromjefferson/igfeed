@@ -11,10 +11,10 @@ export function App() {
     'image': 'https://avatars.githubusercontent.com/u/42497861?v=4'
   }
 
-  const commentList = []
+  const commentListProp = []
 
   for(let i = 0; i < Math.floor(Math.random()*8); i++){
-    commentList.push({
+    commentListProp.push({
       uuid: Math.floor(Math.random()*999999999999999),
       user,
       created: new Date(),
@@ -32,7 +32,7 @@ export function App() {
       user,
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed mollis ipsum. Etiam sagittis, arcu nec suscipit condimentum, turpis neque iaculis massa, sit amet ultrices est lectus facilisis ex. Aenean porttitor mollis libero, in pulvinar neque tempor eget. Suspendisse commodo purus ligula, eu consectetur arcu luctus eget.',
       created: new Date(),
-      commentList,
+      commentListProp,
     })
   }
 
@@ -41,12 +41,12 @@ export function App() {
       <Header />
 
       <div className={styles.wrapper}>
-        <Sidebar user={user} />
+        <Sidebar {...user} />
         
         <main>
           {
             postList.map((post) => (
-              <Post key={post.uuid} post={post} />
+              <Post key={post.uuid} {...post} />
             ))
           }
         </main>

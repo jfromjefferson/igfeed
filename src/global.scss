@@ -25,6 +25,10 @@ body {
     --webkit-font-smoothing: antialiased;
 }
 
+html, body, #root {
+    height: 100%;
+}
+
 body, input, textarea, button {
     font-weight: 400;
     font-size: 1rem;

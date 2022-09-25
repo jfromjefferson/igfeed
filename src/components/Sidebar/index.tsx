@@ -1,8 +1,11 @@
 import { PencilLine } from 'phosphor-react'
+import { UserProps } from '../Post'
 import { Profile } from '../Profile'
 import styles from './styles.module.scss'
 
-export function Sidebar({ user }) {
+export function Sidebar(props: UserProps) {
+    const user = props
+    
     return (
         <aside className={styles.sidebar}>
             <img

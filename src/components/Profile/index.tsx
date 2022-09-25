@@ -1,6 +1,12 @@
 import styles from './styles.module.scss';
 
-export function Profile(props) {
+export interface ProfileProps {
+    isSidebar?: boolean,
+    image: string,
+    hasBorder?: boolean,
+}
+
+export function Profile(props: ProfileProps) {
     const { isSidebar, image, hasBorder} = props
 
     const classList = [

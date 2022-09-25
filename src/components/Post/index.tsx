@@ -1,40 +1,53 @@
 import styles from './styles.module.scss';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import { Profile } from '../Profile';
-import { Comment } from '../Comment';
+import { Comment, CommentProps } from '../Comment';
 
-export function Post({ post }) {
+export interface UserProps {
+    name:string,
+    role:string,
+    coverImage:string,
+    image:string,
+}
+
+export interface PostProps {
+    uuid: number,
+    user: UserProps,
+    content: string,
+    created: Date,
+    commentListProp: CommentProps[],
+}
+
+export function Post({ user, created, commentListProp, content }: PostProps) {
     const [isCommentAreaVisible, setIsCommentAreaVisible] = useState(false)
-    const [commentList, setCommentList] = useState([...post.commentList])
+    const [commentList, setCommentList] = useState([...commentListProp])
     const [commentText, setCommentText] = useState('')
 
-    const { user } = post
-
-    const createdFormatted = format(post.created, "dd 'de' LLLL 'de' u 'às' HH:mm'h'", {
+    const createdFormatted = format(created, "dd 'de' LLLL 'de' u 'às' HH:mm'h'", {
         locale: ptBR,
     })
 
-    const createdRelativeToNow = formatDistanceToNow(post.created, {
+    const createdRelativeToNow = formatDistanceToNow(created, {
         locale: ptBR,
         addSuffix: true,
     })
 
-    const handleClick = (event) => {
+    const handleClick = (event: FormEvent) => {
         event.preventDefault()
 
         setIsCommentAreaVisible(true)
     }
 
-    const removeComment = ({uuid}) => {
+    const removeComment = ({uuid}: CommentProps) => {
         const commentListTemp = commentList.filter(comment => comment.uuid !== uuid)
 
         setCommentList(commentListTemp)
     }
 
-    const updateLike = ({uuid}) => {
-        const commentTemp = commentList.find(comment => comment.uuid === uuid)
+    const updateLike = ({uuid}: CommentProps) => {
+        const commentTemp = commentList.find(comment => comment.uuid === uuid)!
         const commentListTemp = [...commentList]
         const commentIndex = commentList.findIndex(comment => comment.uuid === commentTemp.uuid)
 
@@ -52,7 +65,7 @@ export function Post({ post }) {
         
     }
 
-    const submitComment = (event) => {
+    const submitComment = (event: FormEvent) => {
         event.preventDefault()
 
         if(commentText.trim() === '') {
@@ -68,7 +81,7 @@ export function Post({ post }) {
             created: new Date(),
             text: commentText,
             likes: 0,
-            liked: true
+            liked: false
           }
 
         setCommentList([commentTemp, ...commentList])
@@ -88,13 +101,13 @@ export function Post({ post }) {
                     </div>
                 </div>
 
-                <time title={createdFormatted} dateTime={post.created.toISOString()} className={styles.publishDate}>
+                <time title={createdFormatted} dateTime={created.toISOString()} className={styles.publishDate}>
                     {createdRelativeToNow}
                 </time>
             </header>
 
             <div className={styles.postBody}>
-                <p>{post.content}</p>
+                <p>{content}</p>
             </div>
 
             <hr />
@@ -128,12 +141,12 @@ export function Post({ post }) {
                 }
 
                 {
-                    commentList.map(comment => (
+                    commentList.map((comment: CommentProps) => (
                         <Comment 
                         key={comment.uuid} 
-                        comment={comment} 
                         onRemoveComment={() => removeComment(comment)} 
                         onUpdateLike={() => updateLike(comment)}
+                        {...comment}
                         />
                     ))
                 }
